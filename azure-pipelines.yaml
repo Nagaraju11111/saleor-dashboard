@@ -1,15 +1,19 @@
 ---
   trigger: 
     - main
-  pool: workshop
+  pool: 
+    vmImage: ubuntu-20.04
   stages:
     - stage: build
       jobs:
         - job:
           steps:
-            - script: |
-                docker image build -t sdbad:1.0 .
-                docker image tag sdbad:1.0 9052171017/sdbad:1.0 
-                docker image push 9052171017/sdbad:1.0
+            - task: Docker@2 
+              inputs:
+                command: 'buildAndPush'
+                Dockerfile: '**/Dockerfile'
+                tags: |
+                  9052171017/sdbad:2.0
+                containerRegistry: Dockerhub  
         
   

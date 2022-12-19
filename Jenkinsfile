@@ -12,7 +12,7 @@ pipeline {
             steps {
                sh 'docker image build -t sdb:1.0 .'
                sh 'docker image tag sdb:1.0 9052171017/sdb:1.0'
-               sh 'docker image push 9052171017/sdb:1.0 '
+               sh 'docker image push 9052171017/sdb:1.0'
             }
         }
     }
