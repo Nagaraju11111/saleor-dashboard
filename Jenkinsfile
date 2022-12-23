@@ -15,5 +15,14 @@ pipeline {
                sh 'docker image push 9052171017/sdb:1.0'
             }
         }
+        stage ('terraform') {
+            agent { label 'NODE2' }
+            steps {
+               git url: 'https://github.com/Nagaraju11111/terraform.git', branch: 'master'
+               sh 'terraform init'
+               sh 'terraform validate'
+               sh 'terraform apply -var-file="dev.tfvars" -auto-approve'
+            }
+        }
     }
 }
