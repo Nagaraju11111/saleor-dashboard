@@ -22,6 +22,8 @@ pipeline {
                sh 'terraform init'
                sh 'terraform validate'
                sh 'terraform apply -var-file="dev.tfvars" -auto-approve'
+               sh 'az aks get-credentials --resource-group terraform --name akscluster'
+               sh 'kubectl get nodes'
             }
         }
     }
